@@ -12,8 +12,27 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'joshdick/onedark.vim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'prettier/vim-prettier'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
 Plug 'tpope/vim-commentary'
+Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
 let mapleader=","
@@ -53,6 +72,10 @@ let g:ale_sign_warning = '⚠️'
 " let g:ale_fixers['javascript'] = ['eslint']
 
 set hidden
+set noswapfile
+set smartcase
+
+nnoremap <buffer> <leader>gd *``:<C-u>call CocAction('jumpDefinition')<CR>
 
 " Fix files automatically on save
 let g:ale_fix_on_save = 1
@@ -68,13 +91,15 @@ set shiftwidth=4
 set expandtab
 nnoremap <C-Tab> <C-w>w
 nnoremap <C-S-Tab> <C-w>W
-:set mouse=a
+set mouse=a
 command! -nargs=* Ter execute ":ConqueTermSplit " . <q-args>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 map <C-\> :NERDTreeToggle<CR>
-map  <C-l> :tabn<CR>
-map  <C-h> :tabp<CR>
-map  <C-n> :tabnew<CR>
-map <C-s> :w<kEnter>
+noremap  <C-h> <C-w><C-h>
+noremap  <C-j> <C-w><C-j>
+noremap  <C-k> <C-w><C-k>
+noremap  <C-l> <C-w><C-l>
+noremap ; :
+map <C-s> :w<CR>
 imap <C-s> <Esc>:w<kEnter>i
