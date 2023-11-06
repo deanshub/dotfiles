@@ -2,12 +2,13 @@ call plug#begin()
 Plug 'junegunn/vim-easy-align'
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 Plug 'sheerun/vim-polyglot'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'oplatek/Conque-Shell'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
+Plug 'github/copilot.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'joshdick/onedark.vim'
@@ -35,8 +36,8 @@ Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim'
 call plug#end()
 
+set runtimepath
 let mapleader=","
-
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -53,11 +54,17 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
+
 syntax on
 colorscheme onedark
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
+
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " Keymaps: buffers
 nnoremap <silent> <leader>e :bn<CR>
